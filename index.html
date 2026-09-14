@@ -3,370 +3,207 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>120억병이 잠든 창고 — Whisky Loch V5</title>
-<meta name="theme-color" content="#0b0704">
+<title>120억병이 잠든 창고 — Whisky Loch</title>
+<meta name="theme-color" content="#0d0805">
 <style>
 :root{
-  --gold:#e2b25c;
-  --gold2:#b77a2c;
-  --cream:#f3eadc;
-  --ink:#0f0a07;
+  --gold:#e6b85f;
+  --cream:#f3eadb;
+  --ink:#120c08;
+  --muted:#d5c9bb;
 }
 *{box-sizing:border-box}
-html,body{margin:0;background:#080503;color:#fff;font-family:Pretendard,"Noto Sans KR",Arial,sans-serif}
+html,body{margin:0;padding:0;background:#090603;color:#fff;font-family:Pretendard,"Noto Sans KR",Arial,sans-serif}
 body{overflow-x:hidden}
-#story{height:1120svh}
-#stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#0b0704}
-.progress{position:fixed;z-index:9999;left:0;top:0;height:3px;width:0;background:var(--gold)}
-.photo{position:absolute;inset:-3%;background-size:cover;background-position:center;opacity:0;will-change:opacity,transform,filter}
-#warehousePhoto{
-  z-index:1;
-  background-image:
-    linear-gradient(rgba(8,4,2,.20),rgba(7,4,2,.54)),
-    url('https://commons.wikimedia.org/wiki/Special:Redirect/file/Mackmyra_Whisky_-_Warehouse_Whisky_barrels_at_Hackeberga_Castle.jpg');
+button,input{font:inherit}
+.progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--gold);z-index:9999}
+.story{height:930svh;position:relative}
+.stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#100a06}
+.photo{
+  position:absolute;inset:-3%;
+  background-size:cover;background-position:center;
+  will-change:opacity,transform,filter;
 }
-#barrelPhoto{
-  z-index:2;
+.warehouse{
+  z-index:1;opacity:1;
   background-image:
-    linear-gradient(90deg,rgba(10,6,3,.60),rgba(10,6,3,.08) 45%,rgba(10,6,3,.55)),
-    url('https://commons.wikimedia.org/wiki/Special:Redirect/file/Whiskybarrelside.jpg');
-  background-position:center 45%;
+    linear-gradient(rgba(8,4,2,.18),rgba(8,4,2,.42)),
+    url("https://upload.wikimedia.org/wikipedia/commons/7/76/Mackmyra_Whisky_-_Warehouse_Whisky_barrels_at_Hackeberga_Castle.jpg");
 }
-#stillPhoto{
-  z-index:2;
+.barrel{
+  z-index:2;opacity:0;
   background-image:
-    linear-gradient(rgba(10,5,2,.20),rgba(9,4,2,.52)),
-    url('https://commons.wikimedia.org/wiki/Special:Redirect/file/RAER%27s_Unique_Copper_Stills_at_Jackton_Distillery%2C_East_Kilbride.jpg');
+    linear-gradient(90deg,rgba(8,4,2,.63),rgba(8,4,2,.10) 45%,rgba(8,4,2,.52)),
+    url("https://upload.wikimedia.org/wikipedia/commons/2/2a/Whiskybarrelside.jpg");
+  background-position:center 48%;
 }
-.vignette{position:absolute;z-index:15;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 44%,transparent 38%,rgba(0,0,0,.08) 68%,rgba(0,0,0,.58) 100%)}
-.noise{position:absolute;z-index:14;inset:0;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
-.brand{position:absolute;z-index:40;left:18px;top:18px;padding:8px 11px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(10,6,3,.42);backdrop-filter:blur(10px);font:800 9px/1 ui-monospace,monospace;letter-spacing:.14em}
+.still{
+  z-index:2;opacity:0;
+  background-image:
+    linear-gradient(rgba(8,4,2,.18),rgba(8,4,2,.52)),
+    url("https://upload.wikimedia.org/wikipedia/commons/e/e2/RAER%27s_Unique_Copper_Stills_at_Jackton_Distillery%2C_East_Kilbride.jpg");
+}
+.vignette{position:absolute;inset:0;z-index:15;pointer-events:none;background:radial-gradient(circle at 50% 42%,transparent 36%,rgba(0,0,0,.09) 66%,rgba(0,0,0,.62) 100%)}
+.grain{position:absolute;inset:0;z-index:16;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+.brand{position:absolute;z-index:50;left:18px;top:18px;padding:8px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(10,6,3,.46);backdrop-filter:blur(10px);font:800 9px/1 ui-monospace,monospace;letter-spacing:.14em}
 .brand b{color:var(--gold)}
-.counter{position:absolute;z-index:40;right:18px;top:18px;text-align:right;font:800 9px/1.3 ui-monospace,monospace;letter-spacing:.11em;text-shadow:0 3px 18px #000}
-.counter strong{display:block;font:950 clamp(42px,6vw,84px)/.9 Arial,sans-serif;letter-spacing:-.07em;color:var(--gold)}
-.caption{display:none}
+.counter{position:absolute;z-index:50;right:18px;top:18px;text-align:right;font:800 9px/1.3 ui-monospace,monospace;letter-spacing:.11em;text-shadow:0 3px 16px #000}
+.counter strong{display:block;font:950 clamp(44px,6vw,86px)/.9 Arial,sans-serif;letter-spacing:-.07em;color:var(--gold)}
+.scrollhint{position:absolute;z-index:50;left:50%;bottom:18px;transform:translateX(-50%);font:800 9px/1 ui-monospace,monospace;letter-spacing:.13em;color:#eadfce;text-shadow:0 2px 10px #000;transition:opacity .25s}
+
+/* text layers: never reused, never overlap */
+.scene-copy{position:absolute;z-index:52;max-width:780px;opacity:0;pointer-events:none;text-shadow:0 3px 24px rgba(0,0,0,.88);will-change:opacity,transform}
+.scene-copy.hero{opacity:1}
+.pos-lb{left:5vw;bottom:8vh}
+.pos-lt{left:5vw;top:11vh}
+.pos-c{left:50%;top:50%;width:min(950px,88vw);max-width:none;text-align:center;transform:translate(-50%,-50%)}
+.pos-c .lead,.pos-c .fact{margin-left:auto;margin-right:auto}
 .kicker{font:800 10px/1 ui-monospace,monospace;letter-spacing:.18em;color:var(--gold)}
-.title{margin:13px 0 14px;font-size:clamp(50px,6.9vw,100px);line-height:.89;letter-spacing:-.074em;font-weight:950}
+.title{margin:13px 0 14px;font-size:clamp(50px,7vw,104px);line-height:.89;letter-spacing:-.075em;font-weight:950}
 .title em{font-style:normal;color:var(--gold)}
-.lead{max-width:690px;font-size:clamp(15px,1.35vw,19px);line-height:1.73;color:#e7dfd5}
-.fact{margin-top:14px;font:800 11px/1.55 ui-monospace,monospace;letter-spacing:.05em;color:#f3ece3}
+.lead{max-width:700px;font-size:clamp(15px,1.35vw,19px);line-height:1.73;color:#e8e0d5}
+.fact{margin-top:14px;font:800 11px/1.55 ui-monospace,monospace;letter-spacing:.05em;color:#f3ece2}
 .fact b{color:var(--gold)}
 
-.scene-caption{
-  mix-blend-mode:normal;
-  position:absolute;
-  z-index:42;
-  max-width:770px;
-  opacity:0;
-  pointer-events:none;
-  text-shadow:0 3px 25px rgba(0,0,0,.9);
-  will-change:opacity,transform;
-}
-.scene-caption.pos-left-bottom{left:5vw;bottom:8vh}
-.scene-caption.pos-left-top{left:5vw;top:10vh}
-.scene-caption.pos-center{
-  left:50%;top:50%;
-  width:min(900px,88vw);
-  max-width:none;
-  text-align:center;
-  transform:translate(-50%,-50%);
-}
-.scene-caption.pos-center .lead,
-.scene-caption.pos-center .fact{margin-left:auto;margin-right:auto}
-
-
-/* maturation scene — photo first, typography secondary */
-.agingUI{
-  position:absolute;z-index:55;left:5vw;right:5vw;top:9vh;bottom:8vh;
-  opacity:0;pointer-events:none;transition:opacity .32s
-}
-.agingUI.show{opacity:1}
-.ageLabel{
-  position:absolute;left:0;top:0;
-  text-shadow:0 3px 20px rgba(0,0,0,.85)
-}
-.ageShort{
-  margin-top:10px;
-  font-size:clamp(24px,3vw,40px);
-  line-height:1;
-  letter-spacing:-.04em;
-  font-weight:900;
-  color:#f1e8dc
-}
-.ageShort b{color:var(--gold)}
-.ageHeader{display:none}
-.ageHeader .title{display:none}
-.ageRail{
-  position:absolute;right:3vw;top:12vh;bottom:10vh;width:88px;
-  border-left:1px solid rgba(255,255,255,.34)
-}
-.ageRail .mark{position:absolute;left:-1px;width:26px;border-top:1px solid rgba(255,255,255,.6)}
-.ageRail .mark span{position:absolute;left:34px;top:-8px;font:800 9px/1 ui-monospace,monospace;letter-spacing:.08em;color:#d6c9b9}
-.ageRail .dot{position:absolute;left:-7px;width:13px;height:13px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(226,178,92,.15);transform:translateY(-50%)}
-.ageMeter{
-  position:absolute;left:0;bottom:0;width:min(560px,58vw);
-  display:flex;align-items:end;gap:22px
-}
-.ageNumber{font:950 clamp(52px,7vw,104px)/.78 Arial,sans-serif;letter-spacing:-.08em;color:var(--gold);text-shadow:0 4px 24px rgba(0,0,0,.8)}
-.ageMeta{padding-bottom:6px}
-.ageMeta small{display:block;font:800 9px/1 ui-monospace,monospace;letter-spacing:.14em;color:#b9aa9a}
-.ageMeta p{margin:7px 0 0;max-width:360px;font-size:14px;line-height:1.6;color:#eadfd0}
-.ageStamp{
-  position:absolute;right:11vw;bottom:2vh;
-  padding:9px 12px;border:1px solid rgba(231,196,131,.38);
-  color:#e7c483;font:900 12px/1 ui-monospace,monospace;letter-spacing:.14em;
-  transform:rotate(-3deg);opacity:.8
-}
-.ageGlow{position:absolute;z-index:4;inset:0;opacity:0;background:radial-gradient(circle at 63% 48%,rgba(208,137,46,.16),transparent 28%);pointer-events:none}
-
-/* bottle field */
-#bottleLayer{position:absolute;z-index:20;inset:0;opacity:0;overflow:hidden;pointer-events:none}
-.bottle{position:absolute;width:16px;height:58px;border-radius:3px 3px 6px 6px;background:linear-gradient(90deg,#30250f,#936923 45%,#b07a29 56%,#2b210f)}
-.bottle:before{content:"";position:absolute;left:5px;top:-17px;width:6px;height:18px;background:#4c3718}
-.bottle:after{content:"";position:absolute;left:2px;right:2px;top:23px;height:15px;background:#e6d6b0;opacity:.88}
-#bottleHero{position:absolute;z-index:26;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;text-align:center;text-shadow:0 4px 28px #000}
-#bottleHero small{font:800 9px/1 ui-monospace,monospace;letter-spacing:.15em;color:#d8cbbd}
-#bottleHero strong{display:block;font:950 clamp(78px,12vw,180px)/.8 Arial,sans-serif;letter-spacing:-.09em;color:var(--gold);margin-top:8px}
-#bottleHero p{margin:18px auto 0;max-width:650px;font-size:19px;line-height:1.6;font-weight:900}
+/* bottle scale */
+.bottleLayer{position:absolute;z-index:22;inset:0;opacity:0;overflow:hidden;pointer-events:none}
+.bottle{position:absolute;width:15px;height:56px;border-radius:3px 3px 6px 6px;background:linear-gradient(90deg,#30250f,#8f6523 44%,#ad7728 56%,#2b210f);box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.bottle:before{content:"";position:absolute;left:5px;top:-16px;width:5px;height:17px;background:#4a3617}
+.bottle:after{content:"";position:absolute;left:2px;right:2px;top:22px;height:15px;background:#e6d5af;opacity:.88}
+.scaleHero{position:absolute;z-index:30;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;opacity:0;text-shadow:0 4px 30px #000;pointer-events:none}
+.scaleHero small{font:800 10px/1 ui-monospace,monospace;letter-spacing:.15em;color:#d9cdbf}
+.scaleHero strong{display:block;margin-top:8px;font:950 clamp(80px,13vw,190px)/.8 Arial,sans-serif;letter-spacing:-.09em;color:var(--gold)}
+.scaleHero p{margin:18px auto 0;max-width:650px;font-size:20px;font-weight:900;line-height:1.55}
 
 /* timeline */
-.timeDial{position:absolute;z-index:58;left:5vw;right:5vw;bottom:8vh;opacity:0;pointer-events:none;transition:opacity .3s}
-.timeDial.show{opacity:1;pointer-events:auto}
-.dialTop{display:flex;justify-content:space-between;align-items:end;gap:30px}
-.bigYear{font-size:clamp(70px,9vw,142px);line-height:.78;font-weight:950;letter-spacing:-.08em;color:var(--gold)}
-.yearText{max-width:610px;font-size:16px;line-height:1.72;color:#e3d9cc}
-.track{position:relative;height:58px;margin-top:25px}
-.track:before{content:"";position:absolute;left:0;right:0;top:28px;height:2px;background:linear-gradient(90deg,#6a4c2a,#efbf67)}
-.knob{position:absolute;top:15px;width:28px;height:28px;border-radius:50%;background:var(--gold);border:5px solid #241309;transform:translateX(-50%);touch-action:none;cursor:grab}
+.timeline{position:absolute;z-index:60;left:5vw;right:5vw;bottom:8vh;opacity:0;pointer-events:none;transition:opacity .2s}
+.timeline.show{opacity:1;pointer-events:auto}
+.timelineTop{display:flex;justify-content:space-between;align-items:end;gap:30px}
+.bigYear{font-size:clamp(70px,9vw,145px);line-height:.78;font-weight:950;letter-spacing:-.08em;color:var(--gold)}
+.yearText{max-width:620px;font-size:16px;line-height:1.72;color:#e5dbcf}
+.track{position:relative;height:60px;margin-top:26px}
+.track:before{content:"";position:absolute;left:0;right:0;top:29px;height:2px;background:linear-gradient(90deg,#6d4b29,#efbf66)}
+.track .tick{position:absolute;top:19px;width:1px;height:22px;background:rgba(255,255,255,.25)}
+.track .lab{position:absolute;top:45px;transform:translateX(-50%);font:800 8px/1 ui-monospace,monospace;color:#9f8e7e}
+.knob{position:absolute;top:16px;width:28px;height:28px;border-radius:50%;background:var(--gold);border:5px solid #241309;box-shadow:0 0 0 2px rgba(255,255,255,.16);transform:translateX(-50%);touch-action:none;cursor:grab}
 
-/* still scene */
-.week{position:absolute;z-index:60;left:5vw;right:5vw;bottom:8vh;opacity:0;transition:opacity .3s}
-.weekGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:24px}
-.day{height:82px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);background:rgba(177,102,34,.32);backdrop-filter:blur(6px);font:900 11px/1 ui-monospace,monospace}
-.day.off{background:rgba(39,35,31,.54);color:#746d66}
+/* aging */
+.aging{position:absolute;z-index:62;left:5vw;right:5vw;top:9vh;bottom:8vh;opacity:0;pointer-events:none;transition:opacity .2s}
+.aging.show{opacity:1}
+.ageLabel{position:absolute;left:0;top:0;text-shadow:0 3px 20px rgba(0,0,0,.85)}
+.ageShort{margin-top:10px;font-size:clamp(25px,3vw,42px);font-weight:900;letter-spacing:-.04em}
+.ageShort b{color:var(--gold)}
+.ageRail{position:absolute;right:3vw;top:9vh;bottom:9vh;width:90px;border-left:1px solid rgba(255,255,255,.34)}
+.mark{position:absolute;left:-1px;width:26px;border-top:1px solid rgba(255,255,255,.6)}
+.mark span{position:absolute;left:34px;top:-7px;font:800 9px/1 ui-monospace,monospace;letter-spacing:.08em;color:#d6c9b9;white-space:nowrap}
+.ageDot{position:absolute;left:-7px;width:13px;height:13px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(230,184,95,.16);transform:translateY(-50%)}
+.ageMeter{position:absolute;left:0;bottom:0;display:flex;align-items:end;gap:22px;width:min(570px,60vw)}
+.ageNumber{font:950 clamp(54px,7vw,108px)/.78 Arial,sans-serif;letter-spacing:-.08em;color:var(--gold);text-shadow:0 4px 24px rgba(0,0,0,.8)}
+.ageMeta{padding-bottom:5px}
+.ageMeta small{display:block;font:800 9px/1 ui-monospace,monospace;letter-spacing:.14em;color:#baa99a}
+.ageMeta p{margin:7px 0 0;max-width:390px;font-size:14px;line-height:1.6;color:#eadfd1}
+.ageStamp{position:absolute;right:11vw;bottom:2vh;padding:9px 12px;border:1px solid rgba(232,197,132,.38);color:#e7c483;font:900 12px/1 ui-monospace,monospace;letter-spacing:.14em;transform:rotate(-3deg);opacity:.85}
 
-/* flood finale — layered liquid */
-#flood{
-  position:absolute;
-  z-index:75;
-  left:0;right:0;bottom:-6%;
-  height:0;
-  overflow:visible;
-  pointer-events:none;
-  background:
-    linear-gradient(180deg,
-      rgba(198,126,39,.86) 0%,
-      rgba(157,89,22,.93) 16%,
-      rgba(103,50,11,.97) 52%,
-      rgba(54,23,5,.995) 100%);
-  box-shadow:
-    inset 0 18px 34px rgba(255,211,126,.10),
-    inset 0 -40px 70px rgba(37,12,2,.35);
-  filter:saturate(1.06) contrast(1.03);
-}
-#flood::before{
-  content:"";
-  position:absolute;
-  left:-6%;right:-6%;top:-28px;
-  height:54px;
-  background:
-    radial-gradient(ellipse at 15% 65%,rgba(255,207,119,.34),transparent 26%),
-    radial-gradient(ellipse at 45% 48%,rgba(255,191,80,.28),transparent 24%),
-    radial-gradient(ellipse at 78% 62%,rgba(255,221,139,.25),transparent 22%),
-    linear-gradient(180deg,rgba(255,190,76,.45),rgba(131,67,16,.68));
-  border-radius:50%;
-  filter:blur(3px);
-  animation:surfaceWaveA 5.2s ease-in-out infinite alternate;
-  transform-origin:50% 50%;
-}
-#flood::after{
-  content:"";
-  position:absolute;
-  left:-8%;right:-8%;top:-18px;
-  height:38px;
-  background:
-    repeating-radial-gradient(ellipse at 50% 55%,
-      rgba(255,226,163,.16) 0 9px,
-      rgba(255,196,92,.05) 11px 24px,
-      transparent 26px 42px);
-  mix-blend-mode:screen;
-  opacity:.75;
-  filter:blur(1px);
-  animation:surfaceWaveB 7.2s linear infinite;
-}
-@keyframes surfaceWaveA{
-  0%{transform:translateX(-1.4%) scaleY(.85)}
-  50%{transform:translateX(1.2%) scaleY(1.08)}
-  100%{transform:translateX(-.6%) scaleY(.94)}
-}
-@keyframes surfaceWaveB{
-  0%{background-position:0 0}
-  100%{background-position:120px 0}
-}
+/* distillery */
+.week{position:absolute;z-index:62;left:5vw;right:5vw;bottom:8vh;opacity:0;pointer-events:none}
+.weekGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:22px}
+.day{height:82px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);background:rgba(177,102,34,.34);backdrop-filter:blur(6px);font:900 11px/1 ui-monospace,monospace}
+.day.off{background:rgba(40,36,31,.58);color:#756d66}
 
-.liquidSkin{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-  pointer-events:none;
-}
-.liquidSkin::before{
-  content:"";
-  position:absolute;
-  inset:-10%;
-  background:
-    radial-gradient(circle at 25% 20%,rgba(255,231,176,.18),transparent 19%),
-    radial-gradient(circle at 72% 28%,rgba(255,191,85,.13),transparent 22%),
-    radial-gradient(circle at 45% 67%,rgba(255,206,112,.10),transparent 23%),
-    linear-gradient(125deg,transparent 0 38%,rgba(255,241,198,.08) 45%,transparent 51% 100%);
-  mix-blend-mode:screen;
-  animation:liquidDrift 11s ease-in-out infinite alternate;
-}
-.liquidSkin::after{
-  content:"";
-  position:absolute;
-  inset:-20% -15%;
-  background:
-    repeating-linear-gradient(112deg,
-      transparent 0 34px,
-      rgba(255,229,171,.045) 35px 38px,
-      transparent 40px 76px);
-  opacity:.55;
-  transform:rotate(-3deg);
-  animation:liquidSheen 14s linear infinite;
-}
-@keyframes liquidDrift{
-  from{transform:translate3d(-2%,-1%,0) scale(1.03)}
-  to{transform:translate3d(2%,1.5%,0) scale(1.08)}
-}
-@keyframes liquidSheen{
-  from{background-position:0 0}
-  to{background-position:180px 70px}
-}
+/* whisky liquid */
+.liquidWrap{position:absolute;z-index:75;inset:0;pointer-events:none;opacity:0}
+#liquidCanvas{position:absolute;inset:0;width:100%;height:100%}
+.loch{position:absolute;z-index:90;left:50%;top:50%;width:min(980px,88vw);transform:translate(-50%,-50%);text-align:center;opacity:0;text-shadow:0 5px 30px rgba(0,0,0,.9);pointer-events:none}
+.loch small{font:800 10px/1 ui-monospace,monospace;letter-spacing:.16em}
+.loch strong{display:block;margin:8px 0 20px;font-size:clamp(68px,10vw,160px);line-height:.82;letter-spacing:-.085em;color:var(--gold)}
+.loch p{max-width:760px;margin:auto;font-size:18px;line-height:1.7;color:#f1e7d7}
 
-.liquidHighlight{
-  position:absolute;
-  z-index:78;
-  left:7%;right:7%;top:3%;
-  height:18%;
-  border-radius:50%;
-  background:radial-gradient(ellipse at 50% 15%,rgba(255,238,188,.18),rgba(255,196,96,.06) 38%,transparent 67%);
-  filter:blur(7px);
-  opacity:.7;
-  mix-blend-mode:screen;
-  pointer-events:none;
-  animation:highlightFloat 6.8s ease-in-out infinite alternate;
-}
-@keyframes highlightFloat{
-  from{transform:translateX(-1.5%) scaleX(.98)}
-  to{transform:translateX(1.5%) scaleX(1.03)}
-}
-
-.liquidBubble{
-  position:absolute;
-  z-index:79;
-  width:7px;height:7px;
-  border-radius:50%;
-  border:1px solid rgba(255,228,172,.38);
-  background:rgba(255,206,121,.08);
-  box-shadow:inset 0 0 4px rgba(255,255,255,.12);
-  pointer-events:none;
-  animation:bubbleUp linear infinite;
-}
-@keyframes bubbleUp{
-  from{transform:translateY(14vh) translateX(0) scale(.8);opacity:0}
-  15%{opacity:.5}
-  80%{opacity:.25}
-  to{transform:translateY(-86vh) translateX(24px) scale(1.15);opacity:0}
-}
-
-#loch{
-  position:absolute;
-  z-index:90;
-  left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  width:min(980px,88vw);
-  text-align:center;
-  opacity:0;
-  text-shadow:0 5px 28px #000
-}
-#loch small{font:800 10px/1 ui-monospace,monospace;letter-spacing:.16em}
-#loch strong{
-  display:block;
-  font-size:clamp(68px,10vw,160px);
-  line-height:.82;
-  letter-spacing:-.085em;
-  color:var(--gold);
-  margin:8px 0 20px
-}
-#loch p{max-width:760px;margin:auto;font-size:18px;line-height:1.7;color:#f1e7d7}
-
+.link{position:absolute;z-index:100;right:18px;bottom:18px;color:#fff;text-decoration:none;padding:10px 12px;border:1px solid rgba(255,255,255,.14);background:rgba(10,6,3,.42);backdrop-filter:blur(8px);font:800 9px/1 ui-monospace,monospace;letter-spacing:.1em}
 .end{min-height:100svh;display:flex;align-items:center;background:#f2ebdf;color:#150d08}
-.end .inner{width:min(1100px,88vw);margin:auto;text-align:center}
-.end h2{font-size:clamp(52px,7.5vw,112px);line-height:.9;letter-spacing:-.075em;margin:0}
+.end .inner{width:min(1080px,88vw);margin:auto;text-align:center}
+.end h2{margin:0;font-size:clamp(52px,7.4vw,110px);line-height:.9;letter-spacing:-.075em}
 .end h2 em{font-style:normal;color:#9d5e1c}
 .end p{max-width:800px;margin:26px auto 0;font-size:18px;line-height:1.75;color:#65584b}
 .credits{padding:30px 6%;background:#070402;color:#9b8c7d;font-size:11px;line-height:1.75}
-.link{position:absolute;z-index:100;right:18px;bottom:18px;color:#fff;text-decoration:none;padding:10px 12px;border:1px solid rgba(255,255,255,.14);background:rgba(10,6,3,.40);backdrop-filter:blur(8px);font:800 9px/1 ui-monospace,monospace;letter-spacing:.1em}
 
 @media(max-width:760px){
-  .caption{left:5vw;right:5vw}
+  .scene-copy{left:5vw!important;right:5vw!important}
   .title{font-size:clamp(44px,12vw,72px)}
-  .ageMeter{width:82vw}
-  .ageRail{right:5vw}
-  .dialTop{display:block}.yearText{margin-top:14px}
-  .weekGrid{gap:2px}.day{height:66px;font-size:9px}
+  .timelineTop{display:block}
+  .yearText{margin-top:14px}
+  .ageMeter{width:78vw}
+  .ageRail{right:3vw}
+  .weekGrid{gap:2px}.day{height:65px;font-size:9px}
 }
 </style>
 </head>
 <body>
 <div class="progress" id="progress"></div>
 
-<section id="story">
-  <div id="stage">
-    <div id="warehousePhoto" class="photo"></div>
-    <div id="barrelPhoto" class="photo"></div>
-    <div id="stillPhoto" class="photo"></div>
-    <div id="ageGlow" class="ageGlow"></div>
-    <div id="bottleLayer"></div>
-    <div class="noise"></div>
+<section class="story" id="story">
+  <div class="stage" id="stage">
+    <div class="photo warehouse" id="warehouse"></div>
+    <div class="photo barrel" id="barrel"></div>
+    <div class="photo still" id="still"></div>
+    <div class="bottleLayer" id="bottleLayer"></div>
+    <div class="grain"></div>
     <div class="vignette"></div>
 
     <div class="brand"><b>ASIAE</b> · VISUAL NEWS</div>
-    <div class="counter">CASKS IN STORAGE<strong id="counter">0</strong></div>
+    <div class="counter">CASKS IN STORAGE<strong id="caskCounter">0</strong></div>
+    <div class="scrollhint" id="scrollhint">SCROLL TO ENTER ↓</div>
 
-    <div class="scene-caption pos-left-bottom" data-start="0.00" data-end="0.21">
-      <div class="kicker">01 · THE WAREHOUSE</div>
-      <div class="title">창고 안에는<br><em>2200만개의 시간이</em> 있습니다</div>
-      <div class="lead">스코틀랜드에서 숙성 중인 위스키는 약 14억ℓ. 전 세계가 지금 속도로 마셔도 약 3년치입니다.</div>
+    <div class="scene-copy hero pos-lb" data-start="0.00" data-end="0.12">
+      <div class="kicker">01 · ENTER THE WAREHOUSE</div>
+      <div class="title">120억병이<br><em>잠든 창고</em></div>
+      <div class="lead">스코틀랜드에서 숙성 중인 위스키는 약 14억ℓ. 현재 소비 속도로 마셔도 약 3년치입니다.</div>
       <div class="fact"><b>14억ℓ</b> · 약 <b>2200만 캐스크</b></div>
     </div>
 
-    <div class="scene-caption pos-center" data-start="0.24" data-end="0.35">
-      <div class="kicker">02 · SCALE</div>
-      <div class="title">병으로 바꾸면<br><em>약 120억병</em></div>
-      <div class="lead">70cl 병 기준 환산치입니다. 상당수는 아직 숙성 기간을 채우지 않아 당장 팔 수 있는 완제품이 아닙니다.</div>
-      <div class="fact">현재 소비량 기준 약 <b>3년치</b></div>
+    <div class="scene-copy pos-lb" data-start="0.14" data-end="0.25">
+      <div class="kicker">02 · WALK IN</div>
+      <div class="title">걸어갈수록<br><em>캐스크는 끝나지 않습니다</em></div>
+      <div class="lead">장부상 숫자 2200만개를 ‘창고의 거리’로 바꿔봅니다.</div>
+      <div class="fact">CASKS → <b>22,000,000</b></div>
     </div>
 
-    <div class="scene-caption pos-left-top" data-start="0.39" data-end="0.52">
-      <div class="kicker">03 · REWIND</div>
-      <div class="title">재고는<br><em>10여 년 전부터 쌓였습니다</em></div>
-      <div class="lead">2010년대 수요 증가를 예상해 생산설비와 숙성 물량을 확대했습니다. 이후 코로나19, 물가 상승과 생활비 부담, 젊은 층의 음주 감소가 겹쳤습니다.</div>
-      <div class="fact">2010s 증산 → 2020s 소비 둔화</div>
+    <div class="scaleHero" id="scaleHero">
+      <small>70cl BOTTLES EQUIVALENT</small>
+      <strong id="bottleNumber">1</strong>
+      <p>병으로 환산하면 약 120억병</p>
     </div>
 
-    <div class="agingUI" id="agingUI">
+    <div class="scene-copy pos-lt" data-start="0.42" data-end="0.47">
+      <div class="kicker">04 · REWIND</div>
+      <div class="title">재고는<br><em>하루아침에 생기지 않았습니다</em></div>
+      <div class="lead">2010년대 수요 증가를 예상해 생산설비와 숙성 물량을 확대했습니다.</div>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <div class="timelineTop">
+        <div class="bigYear" id="bigYear">2010</div>
+        <div class="yearText" id="yearText">세계 수요 증가를 예상해 증류업체들이 생산시설과 숙성 물량을 확대합니다.</div>
+      </div>
+      <div class="track" id="track">
+        <i class="tick" style="left:0%"></i><span class="lab" style="left:0%">2010</span>
+        <i class="tick" style="left:31.25%"></i><span class="lab" style="left:31.25%">2015</span>
+        <i class="tick" style="left:62.5%"></i><span class="lab" style="left:62.5%">2020</span>
+        <i class="tick" style="left:100%"></i><span class="lab" style="left:100%">2026</span>
+        <i class="knob" id="knob"></i>
+      </div>
+    </div>
+
+    <div class="aging" id="aging">
       <div class="ageLabel">
-        <div class="kicker">04 · THE 3-YEAR TRAP</div>
+        <div class="kicker">05 · THE 3-YEAR TRAP</div>
         <div class="ageShort">최소 숙성기간 <b>3년</b></div>
       </div>
       <div class="ageRail">
         <i class="mark" style="top:0%"><span>0 YEAR</span></i>
-        <i class="mark" style="top:33.3%"><span>1 YEAR</span></i>
-        <i class="mark" style="top:66.6%"><span>2 YEARS</span></i>
+        <i class="mark" style="top:33.33%"><span>1 YEAR</span></i>
+        <i class="mark" style="top:66.66%"><span>2 YEARS</span></i>
         <i class="mark" style="top:100%"><span>3 YEARS</span></i>
-        <i class="dot" id="ageDot" style="top:0%"></i>
+        <i class="ageDot" id="ageDot" style="top:0%"></i>
       </div>
       <div class="ageMeter">
         <div class="ageNumber"><span id="ageYears">0.0</span></div>
@@ -379,23 +216,19 @@ body{overflow-x:hidden}
     </div>
 
     <div class="week" id="week">
-      <div class="kicker">05 · SLOWING THE STILLS</div>
-      <div class="title" style="font-size:clamp(42px,5.5vw,80px)">창고가 차자<br><em>불을 줄이기 시작했습니다</em></div>
-      <div class="lead">일부 증류소는 가동일을 주 7일에서 5일로 줄였고 생산을 일시 중단한 곳도 있습니다.</div>
+      <div class="kicker">06 · SLOWING THE STILLS</div>
+      <div class="title" style="font-size:clamp(42px,5.5vw,80px)">창고가 차자<br><em>증류소가 속도를 줄입니다</em></div>
+      <div class="lead">일부 증류소는 가동일을 주 7일에서 5일로 줄였고, 생산을 일시 중단한 곳도 있습니다.</div>
       <div class="weekGrid">
         <div class="day">MON</div><div class="day">TUE</div><div class="day">WED</div><div class="day">THU</div><div class="day">FRI</div><div class="day off">SAT</div><div class="day off">SUN</div>
       </div>
     </div>
 
-    <div id="flood">
-      <div class="liquidSkin"></div>
-      <div class="liquidHighlight"></div>
-      <div id="liquidBubbles"></div>
-    </div>
-    <div id="loch">
+    <div class="liquidWrap" id="liquidWrap"><canvas id="liquidCanvas"></canvas></div>
+    <div class="loch" id="loch">
       <small>1980s → 2026</small>
       <strong>WHISKY LOCH</strong>
-      <p>1980년대 과잉 생산으로 막대한 위스키가 남았던 ‘위스키 호수’가 다시 언급됩니다. 2025년 수출액은 1.8%, 물량은 4.3% 줄었고 미국 수출 물량은 15% 감소했습니다.</p>
+      <p>1980년대 과잉 생산으로 막대한 재고가 남아 ‘위스키 호수’라 불렸던 상황이 다시 언급됩니다. 2025년 수출액은 전년 대비 1.8%, 물량은 4.3% 감소했고 미국 수출 물량은 15% 줄었습니다.</p>
     </div>
 
     <a class="link" href="https://www.asiae.co.kr/article/2026091314261825717" target="_blank" rel="noopener">원기사 ↗</a>
@@ -405,147 +238,211 @@ body{overflow-x:hidden}
 <section class="end">
   <div class="inner">
     <h2>위스키는 오래될수록 비싸진다.<br><em>하지만 너무 많이 만들면, 시간도 재고가 된다.</em></h2>
-    <p>업계는 생산 확대 중심 전략에서 재고 관리와 새로운 시장 개척으로 방향을 바꾸고 있습니다.</p>
+    <p>업계는 생산 확대 중심 전략에서 재고 관리와 새로운 시장 개척으로 방향을 바꾸고 있습니다. 인도 등 신흥시장과 관세 인하는 새로운 수요가 될 수 있다는 기대도 남아 있습니다.</p>
   </div>
 </section>
 
 <footer class="credits">
-기사: 아시아경제 최승우 기자, 「'120억병 재고 폭탄' 전 세계가 3년 내내 먹어도 남아…」(2026.09.13). 숙성 장면은 실제 위스키 캐스크 사진을 사용하고, 숫자·타임라인을 최소한의 정보 그래픽으로 겹쳤습니다. 사진: Wikimedia Commons. 실배포 전 파일별 라이선스·크레딧을 최종 확인하세요.
+기사: 아시아경제 「'120억병 재고 폭탄' 전 세계가 3년 내내 먹어도 남아…」(2026.09.13). 배경 사진: Mackmyra Svensk Whisky AB / CC BY-SA 2.0, Göran Söderberg / CC BY-SA 3.0, WhiskyLass / CC BY-SA 4.0, Wikimedia Commons. 본 시각화는 원기사 수치를 체감시키기 위한 인터랙티브 표현입니다.
 </footer>
 
 <script>
 (()=>{
   const story=document.getElementById('story');
   const progress=document.getElementById('progress');
-  const warehouse=document.getElementById('warehousePhoto');
-  const barrelPhoto=document.getElementById('barrelPhoto');
-  const stillPhoto=document.getElementById('stillPhoto');
-  const ageGlow=document.getElementById('ageGlow');
-  const counter=document.getElementById('counter');
-  const sceneCaptions=[...document.querySelectorAll('.scene-caption')];
+  const warehouse=document.getElementById('warehouse');
+  const barrel=document.getElementById('barrel');
+  const still=document.getElementById('still');
+  const caskCounter=document.getElementById('caskCounter');
+  const scrollhint=document.getElementById('scrollhint');
+  const copies=[...document.querySelectorAll('.scene-copy')];
   const bottleLayer=document.getElementById('bottleLayer');
-  const bottleHero=document.getElementById('bottleHero');
+  const scaleHero=document.getElementById('scaleHero');
   const bottleNumber=document.getElementById('bottleNumber');
-  const timeDial=document.getElementById('timeDial');
+  const timeline=document.getElementById('timeline');
   const bigYear=document.getElementById('bigYear');
   const yearText=document.getElementById('yearText');
   const track=document.getElementById('track');
   const knob=document.getElementById('knob');
-  const agingUI=document.getElementById('agingUI');
-  const ageYears=document.getElementById('ageYears');
+  const aging=document.getElementById('aging');
   const ageDot=document.getElementById('ageDot');
+  const ageYears=document.getElementById('ageYears');
   const ageMsg=document.getElementById('ageMsg');
   const ageStamp=document.getElementById('ageStamp');
   const week=document.getElementById('week');
-  const flood=document.getElementById('flood');
+  const liquidWrap=document.getElementById('liquidWrap');
+  const canvas=document.getElementById('liquidCanvas');
+  const ctx=canvas.getContext('2d');
   const loch=document.getElementById('loch');
-  const liquidBubbles=document.getElementById('liquidBubbles');
-  for(let i=0;i<28;i++){
-    const b=document.createElement('i');
-    b.className='liquidBubble';
-    b.style.left=(6+Math.random()*88)+'%';
-    b.style.bottom=(-8-Math.random()*22)+'%';
-    const s=4+Math.random()*7;
-    b.style.width=b.style.height=s+'px';
-    b.style.animationDuration=(6+Math.random()*9)+'s';
-    b.style.animationDelay=(-Math.random()*10)+'s';
-    b.style.opacity=.18+Math.random()*.25;
-    liquidBubbles.appendChild(b);
-  }
 
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const smooth=(a,b,t)=>{t=clamp((t-a)/(b-a),0,1);return t*t*(3-2*t)};
   const lerp=(a,b,t)=>a+(b-a)*t;
-  function P(){
-    const r=story.getBoundingClientRect(),travel=story.offsetHeight-innerHeight;
-    return travel?clamp(-r.top/travel,0,1):0;
-  }
 
-  for(let i=0;i<220;i++){
-    const b=document.createElement('i');b.className='bottle';
-    b.style.left=Math.random()*100+'%';b.style.top=Math.random()*100+'%';
-    const s=.4+Math.random()*1.2;
+  // Immediate first frame fallback even if JS is late.
+  copies[0].style.opacity='1';
+
+  // bottle cloud
+  for(let i=0;i<260;i++){
+    const b=document.createElement('i');
+    b.className='bottle';
+    b.style.left=(Math.random()*100)+'%';
+    b.style.top=(Math.random()*100)+'%';
+    const s=.38+Math.random()*1.25;
     b.style.transform=`scale(${s}) rotate(${(Math.random()-.5)*8}deg)`;
-    b.style.opacity=.25+Math.random()*.55;
+    b.style.opacity=.24+Math.random()*.55;
     bottleLayer.appendChild(b);
   }
 
-  function updateCaptions(p, blocked){
-    sceneCaptions.forEach(el=>{
-      if(blocked){
-        el.style.opacity='0';
-        return;
-      }
-      const start=parseFloat(el.dataset.start);
-      const end=parseFloat(el.dataset.end);
-      const fadeIn=.012;
-      const fadeOut=.014;
-      let opacity=0;
-      if(p>=start && p<=end){
-        if(p<start+fadeIn) opacity=(p-start)/fadeIn;
-        else if(p>end-fadeOut) opacity=(end-p)/fadeOut;
-        else opacity=1;
-      }
-      el.style.opacity=String(clamp(opacity,0,1));
-      const center=el.classList.contains('pos-center');
-      if(center) el.style.transform=`translate(-50%,calc(-50% + ${(1-opacity)*5}px))`;
-      else el.style.transform=`translateY(${(1-opacity)*5}px)`;
-    });
+  function P(){
+    const r=story.getBoundingClientRect();
+    const travel=story.offsetHeight-innerHeight;
+    return travel?clamp(-r.top/travel,0,1):0;
   }
 
-  let drag=false;
+  function copyOpacity(p,start,end){
+    const fi=.012,fo=.014;
+    if(p<start||p>end)return 0;
+    if(p<start+fi)return (p-start)/fi;
+    if(p>end-fo)return (end-p)/fo;
+    return 1;
+  }
+
+  let dragging=false;
   function setYear(y){
     y=Math.round(clamp(y,2010,2026));
     const r=(y-2010)/16;
-    knob.style.left=(r*100)+'%';bigYear.textContent=y;
-    if(y<=2014)yearText.textContent='수요 증가를 예상해 생산시설과 숙성 물량을 확대합니다.';
-    else if(y<=2019)yearText.textContent='생산량이 늘어난 만큼 캐스크도 창고 안에서 계속 숙성됩니다.';
-    else if(y<=2022)yearText.textContent='코로나19와 물가 상승, 생활비 부담이 소비 환경을 바꿉니다.';
-    else yearText.textContent='젊은 층의 음주 감소와 수출 부진이 겹치며 재고 문제가 선명해집니다.';
+    knob.style.left=(r*100)+'%';
+    bigYear.textContent=y;
+    if(y<=2014) yearText.textContent='수요 증가를 예상해 생산시설과 숙성 물량을 확대합니다. 오늘의 재고는 당시의 미래 수요 전망에서 시작됐습니다.';
+    else if(y<=2019) yearText.textContent='늘어난 생산량은 캐스크 안에서 계속 숙성됩니다. 생산과 판매 사이의 시간차가 커집니다.';
+    else if(y<=2022) yearText.textContent='코로나19와 물가 상승, 생활비 부담이 소비 환경을 바꿉니다. 이미 만든 원액은 그대로 창고에 남습니다.';
+    else yearText.textContent='젊은 층의 음주 감소와 수출 부진이 겹칩니다. 2025년 수출 물량은 전년보다 4.3% 감소했습니다.';
   }
   function yearFromEvent(e){
     const r=track.getBoundingClientRect();
-    return 2010+clamp((e.clientX-r.left)/r.width,0,1)*16
+    return 2010+clamp((e.clientX-r.left)/r.width,0,1)*16;
   }
-  knob.addEventListener('pointerdown',e=>{drag=true;knob.setPointerCapture(e.pointerId)});
-  knob.addEventListener('pointermove',e=>{if(drag)setYear(yearFromEvent(e))});
-  knob.addEventListener('pointerup',()=>drag=false);
+  knob.addEventListener('pointerdown',e=>{dragging=true;knob.setPointerCapture(e.pointerId)});
+  knob.addEventListener('pointermove',e=>{if(dragging)setYear(yearFromEvent(e))});
+  knob.addEventListener('pointerup',()=>dragging=false);
   track.addEventListener('pointerdown',e=>setYear(yearFromEvent(e)));
-  setYear(2010);
+
+  function resizeCanvas(){
+    const dpr=Math.min(devicePixelRatio||1,2);
+    canvas.width=Math.round(innerWidth*dpr);
+    canvas.height=Math.round(innerHeight*dpr);
+    canvas.style.width=innerWidth+'px';
+    canvas.style.height=innerHeight+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resizeCanvas();
+  addEventListener('resize',resizeCanvas);
+
+  let lastP=0;
+  function drawLiquid(t,p){
+    const w=innerWidth,h=innerHeight;
+    ctx.clearRect(0,0,w,h);
+    const lp=smooth(.84,.995,p);
+    if(lp<=0)return;
+    const level=lerp(h*1.05,h*.26,lp);
+    const amp=6+lp*8;
+    const grad=ctx.createLinearGradient(0,level,0,h);
+    grad.addColorStop(0,'rgba(205,132,42,.93)');
+    grad.addColorStop(.20,'rgba(160,88,20,.96)');
+    grad.addColorStop(.58,'rgba(102,49,10,.985)');
+    grad.addColorStop(1,'rgba(51,21,4,.998)');
+
+    ctx.beginPath();
+    ctx.moveTo(0,h);
+    ctx.lineTo(0,level);
+    for(let x=0;x<=w;x+=8){
+      const y=level
+        + Math.sin(x*.012+t*.0013)*amp
+        + Math.sin(x*.024-t*.0010)*amp*.36
+        + Math.sin(x*.005+t*.0007)*amp*.55;
+      ctx.lineTo(x,y);
+    }
+    ctx.lineTo(w,h);
+    ctx.closePath();
+    ctx.fillStyle=grad;
+    ctx.fill();
+
+    // surface glow
+    ctx.save();
+    ctx.globalCompositeOperation='screen';
+    ctx.lineWidth=2.2;
+    ctx.strokeStyle='rgba(255,226,156,.38)';
+    ctx.beginPath();
+    for(let x=0;x<=w;x+=7){
+      const y=level
+        + Math.sin(x*.012+t*.0013)*amp
+        + Math.sin(x*.024-t*.0010)*amp*.36;
+      if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+
+    // moving reflection bands
+    for(let i=0;i<5;i++){
+      const cy=level+55+i*70+Math.sin(t*.001+i)*12;
+      const rg=ctx.createRadialGradient(w*(.18+i*.16),cy,0,w*(.18+i*.16),cy,w*.20);
+      rg.addColorStop(0,'rgba(255,222,155,.10)');
+      rg.addColorStop(1,'rgba(255,222,155,0)');
+      ctx.fillStyle=rg;
+      ctx.fillRect(0,Math.max(level,cy-w*.18),w,w*.36);
+    }
+    ctx.restore();
+
+    // bubbles
+    ctx.save();
+    ctx.strokeStyle='rgba(255,228,171,.25)';
+    for(let i=0;i<20;i++){
+      const bx=((i*97 + t*.02*(1+(i%3)))%w);
+      const span=Math.max(30,h-level);
+      const by=h-(((i*61+t*.025*(1+(i%4)))%span));
+      if(by>level+15){
+        const r=2+(i%5);
+        ctx.beginPath();ctx.arc(bx,by,r,0,Math.PI*2);ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
 
   function update(){
-    const p=P();
+    const p=P(); lastP=p;
     const total=document.documentElement.scrollHeight-innerHeight;
     progress.style.width=(total?scrollY/total*100:0)+'%';
+    scrollhint.style.opacity=String(1-smooth(.01,.06,p));
 
-    const walk=smooth(.02,.23,p);
-    warehouse.style.opacity=String((1-smooth(.25,.32,p))*.98);
-    warehouse.style.transform=`scale(${1+walk*.18}) translateY(${-walk*2}%)`;
-    counter.textContent=Math.round(22000000*walk).toLocaleString('ko-KR');
+    const walk=smooth(.03,.26,p);
+    warehouse.style.opacity=String(1-smooth(.27,.34,p));
+    warehouse.style.transform=`scale(${1+walk*.20}) translate3d(0,${-walk*2.2}%,0)`;
+    warehouse.style.filter=`brightness(${.92-walk*.16}) contrast(1.03)`;
+    caskCounter.textContent=Math.round(22000000*walk).toLocaleString('ko-KR');
 
-    const bottleP=smooth(.23,.30,p)*(1-smooth(.35,.40,p));
+    // bottles
+    const bottleP=smooth(.28,.32,p)*(1-smooth(.39,.42,p));
     bottleLayer.style.opacity=String(bottleP*.9);
-    bottleLayer.style.transform=`scale(${.75+smooth(.24,.36,p)*.55})`;
-    bottleHero.style.opacity=String(bottleP);
-    const bProg=smooth(.24,.36,p);
-    const num=Math.max(1,Math.round(Math.pow(10,lerp(0,Math.log10(12000000000),bProg))));
-    bottleNumber.textContent=num.toLocaleString('ko-KR');
+    bottleLayer.style.transform=`scale(${.74+smooth(.29,.40,p)*.58})`;
+    scaleHero.style.opacity=String(bottleP);
+    const bp=smooth(.29,.40,p);
+    bottleNumber.textContent=Math.max(1,Math.round(Math.pow(10,lerp(0,Math.log10(12000000000),bp)))).toLocaleString('ko-KR');
 
-    const dialP=smooth(.415,.43,p)*(1-smooth(.50,.515,p));
-    timeDial.classList.toggle('show',dialP>.1);
-    if(dialP>.1&&!drag)setYear(2010+smooth(.40,.52,p)*16);
+    // timeline
+    const timeP=smooth(.41,.44,p)*(1-smooth(.54,.57,p));
+    timeline.classList.toggle('show',timeP>.08);
+    if(timeP>.08&&!dragging)setYear(2010+smooth(.44,.53,p)*16);
 
-    // photo-based maturation
-    const ageP=smooth(.565,.585,p)*(1-smooth(.70,.72,p));
-    barrelPhoto.style.opacity=String(ageP);
-    barrelPhoto.style.transform=`scale(${1.05+smooth(.57,.72,p)*.10}) translateX(${smooth(.57,.72,p)*1.2}%)`;
-    barrelPhoto.style.filter=`brightness(${.76+smooth(.57,.72,p)*.08}) contrast(1.04) saturate(.9)`;
-    ageGlow.style.opacity=String(ageP*.8);
-    agingUI.classList.toggle('show',ageP>.1);
-    const yrs=smooth(.57,.71,p)*3;
+    // barrel/aging
+    const ageP=smooth(.56,.59,p)*(1-smooth(.69,.72,p));
+    barrel.style.opacity=String(ageP);
+    barrel.style.transform=`scale(${1.04+smooth(.58,.70,p)*.10}) translateX(${smooth(.58,.70,p)*1.2}%)`;
+    barrel.style.filter=`brightness(${.80+smooth(.58,.70,p)*.06}) contrast(1.05) saturate(.9)`;
+    aging.classList.toggle('show',ageP>.08);
+    const yrs=smooth(.59,.69,p)*3;
     ageYears.textContent=yrs.toFixed(1);
     ageDot.style.top=(yrs/3*100)+'%';
-    if(yrs<2.95){
+    if(yrs<2.98){
       ageMsg.textContent='아직 최소 숙성기간을 채우지 못했습니다.';
       ageStamp.textContent='NOT YET SCOTCH';
     }else{
@@ -553,30 +450,37 @@ body{overflow-x:hidden}
       ageStamp.textContent='MINIMUM AGE REACHED';
     }
 
-    const stillP=smooth(.755,.775,p)*(1-smooth(.84,.86,p));
-    stillPhoto.style.opacity=String(stillP);
-    stillPhoto.style.transform=`scale(${1.03+stillP*.07})`;
+    // stillhouse
+    const stillP=smooth(.71,.74,p)*(1-smooth(.82,.85,p));
+    still.style.opacity=String(stillP);
+    still.style.transform=`scale(${1.03+stillP*.07})`;
     week.style.opacity=String(stillP);
 
-    const lochP=smooth(.89,.985,p);
-    flood.style.height=(lochP*76)+'%';
-    flood.style.transform=`translateY(${(1-lochP)*10}px)`;
-    const liquidSkin=flood.querySelector('.liquidSkin');
-    const liquidHighlight=flood.querySelector('.liquidHighlight');
-    if(liquidSkin){
-      liquidSkin.style.transform=`translateY(${Math.sin(p*18)*2}px)`;
-    }
-    if(liquidHighlight){
-      liquidHighlight.style.opacity=String(.25 + lochP*.55);
-    }
-    loch.style.opacity=String(smooth(.90,.97,p));
+    // liquid
+    const liquidP=smooth(.83,.88,p);
+    liquidWrap.style.opacity=String(liquidP);
+    loch.style.opacity=String(smooth(.90,.96,p));
 
-    updateCaptions(p, dialP>.06 || ageP>.06 || stillP>.06 || lochP>.10);
+    // text: hide all article captions during special UI windows
+    const blocked=timeP>.06||ageP>.06||stillP>.06||liquidP>.10||bottleP>.10;
+    copies.forEach((el,i)=>{
+      let o=0;
+      if(!blocked || (i===0 && p<.12) || (i===1 && p<.25)){
+        o=copyOpacity(p,parseFloat(el.dataset.start),parseFloat(el.dataset.end));
+      }
+      el.style.opacity=String(clamp(o,0,1));
+      if(el.classList.contains('pos-c')) el.style.transform=`translate(-50%,calc(-50% + ${(1-o)*5}px))`;
+      else el.style.transform=`translateY(${(1-o)*5}px)`;
+    });
   }
 
-  addEventListener('scroll',update,{passive:true});
-  addEventListener('resize',update);
-  update();
+  function loop(t){
+    update();
+    drawLiquid(t,lastP);
+    requestAnimationFrame(loop);
+  }
+  setYear(2010);
+  requestAnimationFrame(loop);
 })();
 </script>
 </body>
